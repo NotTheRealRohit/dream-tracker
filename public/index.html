@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dream Purchases Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header>
+      <h1>Dream Purchases Tracker</h1>
+      <p>Decide what you want, see when you can actually afford it.</p>
+    </header>
+
+    <!-- Money Overview -->
+    <section class="card" id="financeSection">
+      <h2>Your Monthly Money Picture</h2>
+      <p class="card-subtitle">
+        Add your monthly income and past expense totals. I’ll estimate your average expense and savings.
+      </p>
+
+      <div class="field-row">
+        <label for="incomeInput">Monthly income (₹)</label>
+        <input id="incomeInput" type="number" min="0" step="100" placeholder="e.g. 60,000" />
+      </div>
+
+      <div class="field-row">
+        <div class="inline space-between">
+          <div>
+            <label>Monthly expense history</label>
+            <span class="muted">Add one row per month (total spent that month)</span>
+          </div>
+          <button id="addExpenseRowBtn" class="small" type="button">+ Add month</button>
+        </div>
+      </div>
+
+      <div id="expenseRowsContainer"></div>
+
+      <div style="margin-top: 0.75rem;">
+        <button id="saveFinanceBtn" type="button">Save money profile</button>
+      </div>
+
+      <div style="margin-top: 0.75rem;">
+        <div class="chips-row">
+          <span class="chip" id="avgExpenseChip">Avg monthly expense: —</span>
+          <span class="chip" id="monthlySavingsChip">Estimated monthly savings: —</span>
+        </div>
+        <p class="muted" style="margin-top: 0.4rem;">
+          These numbers are used to estimate when you can afford each dream item.
+        </p>
+      </div>
+    </section>
+
+    <!-- Add Dream Item -->
+    <section class="card" id="addItemSection">
+      <h2>Add a Dream Item</h2>
+      <p class="card-subtitle">
+        Give each item a price and link. I’ll show how long it’ll take to save for it.
+      </p>
+
+      <div class="field-row">
+        <label for="itemNameInput">Item name</label>
+        <input id="itemNameInput" type="text" placeholder="e.g. Sony WH-1000XM5 headphones" />
+      </div>
+
+      <div class="field-row">
+        <label for="itemPriceInput">Current price (₹)</label>
+        <input id="itemPriceInput" type="number" min="0" step="100" placeholder="e.g. 35,000" />
+      </div>
+
+      <div class="field-row">
+        <label for="itemLinkInput">Online shop link</label>
+        <input id="itemLinkInput" type="text" placeholder="Paste product URL (Amazon, Flipkart, etc.)" />
+      </div>
+
+      <div class="field-row">
+        <label for="itemPriorityInput">Priority</label>
+        <select id="itemPriorityInput">
+          <option value="high">High (want ASAP)</option>
+          <option value="medium" selected>Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+
+      <div>
+        <button id="addItemBtn" type="button">+ Add to dream list</button>
+      </div>
+    </section>
+
+    <!-- List of Dream Items -->
+    <section class="card" id="itemsSection">
+      <div class="inline space-between full-width">
+        <div>
+          <h2>Your Dream List</h2>
+          <p class="card-subtitle">
+            Sorted by priority. Estimates use your current monthly savings.
+          </p>
+        </div>
+        <div class="inline">
+          <button id="aiPlanBtn" class="small secondary" type="button">
+            🤖 AI Smart Plan
+          </button>
+          <span class="pill">MVP+</span>
+        </div>
+      </div>
+
+      <div id="itemsContainer"></div>
+    </section>
+
+    <p class="footer-note">
+      Data is stored only in this browser (localStorage). No login, no cloud.
+    </p>
+  </div>
+
+  <!-- Savings Plan Modal -->
+  <div id="savingsModalBackdrop" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Savings plan</h3>
+        <button id="modalCloseBtn" class="small secondary" type="button">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
