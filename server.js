@@ -6,6 +6,15 @@ const { OpenRouter } = require("@openrouter/sdk");
 
 const app = express();
 
+const rateLimit = require("express-rate-limit");
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100, // 100 AI calls per 15 mins
+});
+
+app.use("/api/", limiter);
+
 // Allow all origins for now (you can tighten later)
 app.use(
   cors({
